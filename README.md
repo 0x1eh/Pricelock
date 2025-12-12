@@ -16,7 +16,7 @@ Artifacts in this repository showcase Business Analysis work on defining charact
 
 # Result
 - [Software Requirements Document](Software_Requirements_Document.md) - the main document
-- UI Mock-ups - are referenced in BRD
+- UI Mock-ups - are referenced in the SRD
 	- [Checkout](Wireframe_1_Checkout_Pricelock.html)
 	- [Pricelock Payment Breakdown](Wireframe_2_Pricelock_Breakdown.html)
 	- [Payment Success Screen](Wireframe_3_Payment1_Success.html)
