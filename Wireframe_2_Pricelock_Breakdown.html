@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricelock Payment Breakdown | Rail Ninja</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #FFFFFF;
+            color: #1A1A1A;
+            line-height: 1.5;
+        }
+
+        .mobile-container {
+            max-width: 390px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #1A1A1A;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .back-btn {
+            color: #F5A623;
+            font-size: 24px;
+        }
+
+        .header-title {
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .home-icon {
+            color: #F5A623;
+            font-size: 24px;
+        }
+
+        .trip-info {
+            margin: 20px;
+            padding: 16px;
+            border: 2px dashed #F5A623;
+            border-radius: 12px;
+            background: #FFFBF0;
+        }
+
+        .trip-route {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .route-arrow {
+            color: #F5A623;
+        }
+
+        /* Pricelock Active Section */
+        .pricelock-active {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFFBF0 100%);
+            border: 2px solid #F5A623;
+            border-radius: 16px;
+            padding: 24px 20px;
+            margin: 20px;
+        }
+
+        .pricelock-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #F5A623;
+            color: #FFFFFF;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .pricelock-heading {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1A1A1A;
+        }
+
+        .pricelock-subheading {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        /* Payment Breakdown */
+        .payment-breakdown {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .breakdown-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1A1A1A;
+        }
+
+        .payment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .payment-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .payment-item-left {
+            flex: 1;
+        }
+
+        .payment-item-label {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .payment-item-detail {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .payment-item-amount {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .payment-1 .payment-item-amount {
+            color: #F5A623;
+        }
+
+        .payment-2 .payment-item-amount {
+            color: #666;
+        }
+
+        .payment-timeline {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Total comparison */
+        .total-comparison {
+            background: #E8F5E9;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .comparison-label {
+            font-size: 14px;
+            color: #2E7D32;
+            font-weight: 500;
+        }
+
+        .comparison-amount {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2E7D32;
+        }
+
+        /* Formula box */
+        .formula-box {
+            background: #F5F5F5;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .formula-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+        .formula {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #1A1A1A;
+            line-height: 1.8;
+        }
+
+        /* Important notes */
+        .important-notes {
+            background: #FFF3E0;
+            border-left: 4px solid #FF9800;
+            padding: 16px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .notes-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #E65100;
+        }
+
+        .note-item {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .note-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .note-icon {
+            color: #FF9800;
+            font-size: 16px;
+        }
+
+        /* FRS Annotations */
+        .frs-annotation {
+            background: #E3F2FD;
+            border-left: 3px solid #2196F3;
+            padding: 10px 12px;
+            margin: 16px 20px;
+            font-size: 11px;
+            color: #1565C0;
+            font-family: monospace;
+            line-height: 1.6;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 20px;
+        }
+
+        .cta-button {
+            background: #1A1A1A;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .secondary-button {
+            background: #FFFFFF;
+            color: #1A1A1A;
+            border: 2px solid #E5E5E5;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Header -->
+        <div class="header">
+            <span class="back-btn">←</span>
+            <span class="header-title">Payment Details</span>
+            <span class="home-icon">🏠</span>
+        </div>
+
+        <!-- Trip Info -->
+        <div class="trip-info">
+            <div class="trip-route">
+                <span>Krakow</span>
+                <span class="route-arrow">→</span>
+                <span>Warsaw</span>
+            </div>
+            <div style="font-size: 13px; color: #666; margin-top: 4px;">
+                Thu, 18 Sep • 12:23 AM - 04:36 AM
+            </div>
+        </div>
+
+        <!-- Pricelock Active -->
+        <div class="pricelock-active">
+            <div class="pricelock-badge">
+                <span>🔒</span>
+                <span>Pricelock Activated</span>
+            </div>
+
+            <h2 class="pricelock-heading">Split Payment Plan</h2>
+            <p class="pricelock-subheading">
+                Pay in 2 installments with no extra fees
+            </p>
+
+            <!-- Payment Breakdown -->
+            <div class="payment-breakdown">
+                <h3 class="breakdown-title">Your Payments</h3>
+
+                <!-- Payment 1 -->
+                <div class="payment-item payment-1">
+                    <div class="payment-item-left">
+                        <div class="payment-item-label">Payment 1 - Pay Today</div>
+                        <div class="payment-item-detail">
+                            Service fee: $5.00<br>
+                            Ticket deposit (20%): $8.00
+                        </div>
+                        <div class="payment-timeline">
+                            📅 Due now
+                        </div>
+                    </div>
+                    <div class="payment-item-amount">$13</div>
+                </div>
+
+                <!-- Payment 2 -->
+                <div class="payment-item payment-2">
+                    <div class="payment-item-left">
+                        <div class="payment-item-label">Payment 2 - Pay Later</div>
+                        <div class="payment-item-detail">
+                            Remaining ticket balance (80%): $32.00
+                        </div>
+                        <div class="payment-timeline">
+                            📅 Due by Sep 4, 2025
+                        </div>
+                    </div>
+                    <div class="payment-item-amount">$32</div>
+                </div>
+            </div>
+
+            <!-- Total -->
+            <div class="total-comparison">
+                <span class="comparison-label">Total (same as full payment)</span>
+                <span class="comparison-amount">$45</span>
+            </div>
+
+            <!-- Formula -->
+            <div class="formula-box">
+                <div class="formula-title">CALCULATION</div>
+                <div class="formula">
+                    Payment 1 = $5 + ($40 × 0.20) = $13<br>
+                    Payment 2 = $40 × 0.80 = $32<br>
+                    Due Date = Sep 18 - 14 days = Sep 4
+                </div>
+            </div>
+        </div>
+
+        <!-- FRS Annotation -->
+        <div class="frs-annotation">
+            <strong>FRS References:</strong><br>
+            FR-19: Payment breakdown display with clear amounts<br>
+            FR-20: Format "Pay X now, Y due [date]"<br>
+            BR-01: Payment 1 = Service Fee + 20% of ticket<br>
+            BR-02: Payment 2 = 80% of ticket price<br>
+            BR-03: Total equals standard booking price<br>
+            BR-04: Payment 2 due = Departure - 14 days<br>
+            NFR-01: Frontend calculation (< 100ms)<br>
+            A1: 20/80 split (PROPOSED - needs PM approval)<br>
+            A2: 14 days (PROPOSED - needs PM approval)
+        </div>
+
+        <!-- Important Notes -->
+        <div class="important-notes">
+            <div class="notes-title">⚠️ Important Information</div>
+            <div class="note-item">
+                <span class="note-icon">•</span>
+                <span>Payment 2 is due 14 days before departure (Sep 4, 2025)</span>
+            </div>
+            <div class="note-item">
+                <span class="note-icon">•</span>
+                <span>You'll receive reminders 7, 3, and 1 day before due date</span>
+            </div>
+            <div class="note-item">
+                <span class="note-icon">•</span>
+                <span>Tickets will be issued after full payment is received</span>
+            </div>
+            <div class="note-item">
+                <span class="note-icon">•</span>
+                <span>Service fee ($5) is non-refundable</span>
+            </div>
+        </div>
+
+        <div class="frs-annotation">
+            <strong>Additional FRS:</strong><br>
+            FR-27: Reminder schedule (T-7, T-3, T-1, T-0)<br>
+            BR-15: Tickets not issued until fully paid (A6)<br>
+            BR-07: Service fee non-refundable (A5)<br>
+            FR-04: Currency locked at booking time (A8)
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <button class="cta-button">Continue to Payment</button>
+            <button class="secondary-button">Choose Different Payment Option</button>
+        </div>
+    </div>
+</body>
+</html>

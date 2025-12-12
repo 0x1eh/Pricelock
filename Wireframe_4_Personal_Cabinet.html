@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Cabinet - Pending Payment | Rail Ninja</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #F5F5F5;
+            color: #1A1A1A;
+        }
+
+        .mobile-container {
+            max-width: 390px;
+            margin: 0 auto;
+            background: #F5F5F5;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #1A1A1A;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .back-btn {
+            color: #F5A623;
+            font-size: 24px;
+        }
+
+        .header-title {
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .menu-icon {
+            color: #F5A623;
+            font-size: 24px;
+        }
+
+        /* Page Title */
+        .page-title {
+            padding: 20px;
+            background: #FFFFFF;
+        }
+
+        .page-title h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Tabs */
+        .tabs {
+            background: #FFFFFF;
+            display: flex;
+            border-bottom: 1px solid #E5E5E5;
+            padding: 0 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 0;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            color: #F5A623;
+            border-bottom-color: #F5A623;
+            font-weight: 600;
+        }
+
+        /* Order Card */
+        .order-list {
+            padding: 16px 20px;
+        }
+
+        .order-card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+
+        .order-number {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .order-number strong {
+            color: #1A1A1A;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            background: #FFF3CD;
+            color: #856404;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-badge.pending {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .status-badge.paid {
+            background: #E8F5E9;
+            color: #2E7D32;
+        }
+
+        /* Trip Details */
+        .trip-details {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .trip-route {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .trip-city {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .trip-arrow {
+            color: #F5A623;
+            font-size: 18px;
+        }
+
+        .trip-date {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Payment Status */
+        .payment-status {
+            margin-bottom: 16px;
+        }
+
+        .payment-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .payment-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .payment-icon {
+            font-size: 16px;
+        }
+
+        .payment-amount {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .payment-amount.success {
+            color: #34C759;
+        }
+
+        .payment-amount.pending {
+            color: #F5A623;
+        }
+
+        /* Payment 2 Alert */
+        .payment-alert {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFFBF0 100%);
+            border: 2px solid #F5A623;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .alert-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .alert-icon {
+            font-size: 20px;
+        }
+
+        .alert-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .alert-message {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .countdown {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #E65100;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .countdown-icon {
+            font-size: 16px;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: #1A1A1A;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            flex: 1;
+            background: #FFFFFF;
+            color: #1A1A1A;
+            border: 2px solid #E5E5E5;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        /* FRS Annotation */
+        .frs-annotation {
+            background: #E3F2FD;
+            border-left: 3px solid #2196F3;
+            padding: 10px 12px;
+            margin: 16px 20px;
+            font-size: 11px;
+            color: #1565C0;
+            font-family: monospace;
+            line-height: 1.6;
+        }
+
+        /* Info Section */
+        .info-section {
+            background: #FFFFFF;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 0 20px 20px;
+        }
+
+        .info-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1A1A1A;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            background: #1A1A1A;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 390px;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #666;
+            font-size: 11px;
+        }
+
+        .nav-item.active {
+            color: #F5A623;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Header -->
+        <div class="header">
+            <span class="back-btn">←</span>
+            <span class="header-title">My Bookings</span>
+            <span class="menu-icon">☰</span>
+        </div>
+
+        <!-- Page Title -->
+        <div class="page-title">
+            <h1>Personal Cabinet</h1>
+            <div class="page-subtitle">Manage your train bookings</div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active">Upcoming</div>
+            <div class="tab">Past</div>
+            <div class="tab">Cancelled</div>
+        </div>
+
+        <div class="frs-annotation">
+            <strong>Conceptual Wireframe:</strong> Personal Cabinet not accessible without real order.<br>
+            This screen shows expected layout per FR-22, FR-23, FR-24, FR-25.
+        </div>
+
+        <!-- Order List -->
+        <div class="order-list">
+            <!-- Order Card with Pending Payment -->
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-number">
+                        Order <strong>#RN-12345</strong>
+                    </div>
+                    <div class="status-badge pending">Payment Pending</div>
+                </div>
+
+                <!-- Trip Details -->
+                <div class="trip-details">
+                    <div class="trip-route">
+                        <span class="trip-city">Krakow</span>
+                        <span class="trip-arrow">→</span>
+                        <span class="trip-city">Warsaw</span>
+                    </div>
+                    <div class="trip-date">
+                        Thu, September 18, 2025 • 12:23 AM - 04:36 AM
+                    </div>
+                </div>
+
+                <!-- Payment Status -->
+                <div class="payment-status">
+                    <div class="payment-row">
+                        <div class="payment-label">
+                            <span class="payment-icon">✓</span>
+                            <span>Payment 1</span>
+                        </div>
+                        <div class="payment-amount success">$13.00</div>
+                    </div>
+                    <div class="payment-row">
+                        <div class="payment-label">
+                            <span class="payment-icon">⏳</span>
+                            <span>Payment 2</span>
+                        </div>
+                        <div class="payment-amount pending">$32.00</div>
+                    </div>
+                </div>
+
+                <!-- Payment 2 Alert -->
+                <div class="payment-alert">
+                    <div class="alert-header">
+                        <span class="alert-icon">💳</span>
+                        <span class="alert-title">Second Payment Due</span>
+                    </div>
+                    <div class="alert-message">
+                        Complete your booking by paying the remaining balance.
+                    </div>
+                    <div class="countdown">
+                        <span class="countdown-icon">⏱</span>
+                        <span>7 days remaining (Due Sep 4, 2025)</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn-primary">Pay Now</button>
+                        <button class="btn-secondary">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="frs-annotation">
+                <strong>FRS References:</strong><br>
+                FR-22: Order displayed with status "payment_2_pending"<br>
+                FR-23: Show Payment 2 amount, due date, days remaining<br>
+                FR-24: "Pay Now" button always visible<br>
+                FR-06: User can pay at any time before due date (BR-11 early payment)<br>
+                DR-03: payment_2_status = "pending"<br>
+                DR-05: payment_2_due_date calculated
+            </div>
+
+            <!-- Example: Fully Paid Order -->
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-number">
+                        Order <strong>#RN-11234</strong>
+                    </div>
+                    <div class="status-badge paid">Fully Paid</div>
+                </div>
+
+                <div class="trip-details">
+                    <div class="trip-route">
+                        <span class="trip-city">Berlin</span>
+                        <span class="trip-arrow">→</span>
+                        <span class="trip-city">Prague</span>
+                    </div>
+                    <div class="trip-date">
+                        Mon, August 15, 2025 • 09:00 AM - 01:30 PM
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-primary" style="flex: 1;">View Tickets</button>
+                    <button class="btn-secondary" style="flex: 1;">Manage</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <div class="info-title">About Pricelock Payments</div>
+            <div class="info-item">
+                <span>•</span>
+                <span>Tickets will be issued after your second payment is complete</span>
+            </div>
+            <div class="info-item">
+                <span>•</span>
+                <span>You'll receive email reminders before your payment due date</span>
+            </div>
+            <div class="info-item">
+                <span>•</span>
+                <span>You can pay early at any time</span>
+            </div>
+        </div>
+
+        <div class="frs-annotation">
+            <strong>Key Features:</strong><br>
+            FR-05: Early payment allowed (BR-11)<br>
+            FR-25: Payment 2 payment method selection<br>
+            FR-26: Payment processing with same states as Payment 1<br>
+            FR-17: After Payment 2 success → status "fully_paid"<br>
+            BR-15: Tickets issued only when fully_paid (A6)
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item">
+                <div class="nav-icon">🔍</div>
+                <div>Search</div>
+            </div>
+            <div class="nav-item active">
+                <div class="nav-icon">🎫</div>
+                <div>My Tickets</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">💬</div>
+                <div>Support</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">👤</div>
+                <div>Profile</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

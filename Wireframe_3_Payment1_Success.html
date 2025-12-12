@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment 1 Complete | Rail Ninja</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #FFFFFF;
+            color: #1A1A1A;
+        }
+
+        .mobile-container {
+            max-width: 390px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #1A1A1A;
+            padding: 16px 20px;
+            text-align: center;
+        }
+
+        .header-title {
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* Success Section */
+        .success-section {
+            text-align: center;
+            padding: 40px 20px 30px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #34C759;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 40px;
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1A1A1A;
+        }
+
+        .success-subtitle {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .order-number {
+            background: #F5F5F5;
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .order-number strong {
+            color: #1A1A1A;
+            font-weight: 600;
+        }
+
+        /* Payment Summary */
+        .payment-summary {
+            background: #F8F8F8;
+            border-radius: 16px;
+            padding: 24px 20px;
+            margin: 20px;
+        }
+
+        .summary-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1A1A1A;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #E5E5E5;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+            padding-top: 16px;
+            margin-top: 8px;
+        }
+
+        .summary-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .summary-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .summary-value.success {
+            color: #34C759;
+        }
+
+        .summary-value.pending {
+            color: #F5A623;
+        }
+
+        .summary-total {
+            font-size: 18px !important;
+            font-weight: 700 !important;
+        }
+
+        .check-icon {
+            color: #34C759;
+            margin-right: 6px;
+        }
+
+        .pending-icon {
+            color: #F5A623;
+            margin-right: 6px;
+        }
+
+        /* Next Payment Card */
+        .next-payment-card {
+            background: linear-gradient(135deg, #FFFBF0 0%, #FFF8E1 100%);
+            border: 2px solid #F5A623;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .card-icon {
+            font-size: 24px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .card-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: #F5A623;
+            margin-bottom: 8px;
+        }
+
+        .card-due-date {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .card-due-date strong {
+            color: #1A1A1A;
+            font-weight: 600;
+        }
+
+        .reminder-note {
+            background: #FFFFFF;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #666;
+            display: flex;
+            gap: 8px;
+        }
+
+        .reminder-icon {
+            font-size: 16px;
+        }
+
+        /* Important Notes */
+        .info-box {
+            background: #E3F2FD;
+            border-left: 4px solid #2196F3;
+            padding: 16px;
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        .info-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1565C0;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #1565C0;
+            line-height: 1.5;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* FRS Annotation */
+        .frs-annotation {
+            background: #E3F2FD;
+            border-left: 3px solid #2196F3;
+            padding: 10px 12px;
+            margin: 16px 20px;
+            font-size: 11px;
+            color: #1565C0;
+            font-family: monospace;
+            line-height: 1.6;
+        }
+
+        /* CTAs */
+        .cta-section {
+            padding: 20px;
+        }
+
+        .primary-btn {
+            background: #1A1A1A;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .secondary-btn {
+            background: #FFFFFF;
+            color: #1A1A1A;
+            border: 2px solid #E5E5E5;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            width: 100%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">Booking Confirmed</div>
+        </div>
+
+        <!-- Success Section -->
+        <div class="success-section">
+            <div class="success-icon">✓</div>
+            <h1 class="success-title">Payment 1 Complete!</h1>
+            <p class="success-subtitle">Your booking is confirmed</p>
+            <div class="order-number">
+                Order <strong>#RN-12345</strong>
+            </div>
+        </div>
+
+        <!-- Payment Summary -->
+        <div class="payment-summary">
+            <h2 class="summary-title">Payment Summary</h2>
+            
+            <div class="summary-row">
+                <span class="summary-label">
+                    <span class="check-icon">✓</span>
+                    Payment 1
+                </span>
+                <span class="summary-value success">$13.00</span>
+            </div>
+
+            <div class="summary-row">
+                <span class="summary-label">
+                    <span class="pending-icon">⏳</span>
+                    Payment 2
+                </span>
+                <span class="summary-value pending">$32.00</span>
+            </div>
+
+            <div class="summary-row">
+                <span class="summary-label">Total Booking</span>
+                <span class="summary-value summary-total">$45.00</span>
+            </div>
+        </div>
+
+        <div class="frs-annotation">
+            <strong>FRS References:</strong><br>
+            FR-02: Payment 2 record created with amount, due date, status "pending"<br>
+            FR-04: Payment 2 amount locked in booking currency<br>
+            FR-31: Confirmation email sent<br>
+            DR-01 to DR-08: Order data fields populated
+        </div>
+
+        <!-- Next Payment Card -->
+        <div class="next-payment-card">
+            <div class="card-header">
+                <span class="card-icon">💳</span>
+                <span class="card-title">Next Payment</span>
+            </div>
+
+            <div class="card-amount">$32</div>
+            <div class="card-due-date">
+                Due by <strong>September 4, 2025</strong><br>
+                (14 days before departure)
+            </div>
+
+            <div class="reminder-note">
+                <span class="reminder-icon">🔔</span>
+                <span>We'll send you reminders before your payment is due. You can pay early anytime from your account.</span>
+            </div>
+        </div>
+
+        <div class="frs-annotation">
+            <strong>Next Steps (FRS):</strong><br>
+            FR-05: User can pay Payment 2 early (BR-11)<br>
+            FR-27-29: Reminder schedule: T-7, T-3, T-1, T-0 + grace period<br>
+            FR-22: Payment 2 visible in Personal Cabinet<br>
+            BR-04: Due date = Departure - 14 days (A2)
+        </div>
+
+        <!-- Important Info -->
+        <div class="info-box">
+            <div class="info-title">📋 Important Information</div>
+            <div class="info-item">
+                <span>•</span>
+                <span><strong>Tickets NOT issued yet.</strong> You'll receive tickets after Payment 2 is complete.</span>
+            </div>
+            <div class="info-item">
+                <span>•</span>
+                <span>Confirmation email sent to your email address.</span>
+            </div>
+            <div class="info-item">
+                <span>•</span>
+                <span>You can view and manage this booking in your Personal Cabinet.</span>
+            </div>
+            <div class="info-item">
+                <span>•</span>
+                <span>Service fee ($5) is non-refundable if you cancel.</span>
+            </div>
+        </div>
+
+        <div class="frs-annotation">
+            <strong>Critical Business Rules:</strong><br>
+            BR-15, FR-16: Tickets NOT issued until Payment 2 complete (A6 - CRITICAL assumption)<br>
+            BR-07: Service fee non-refundable (A5)<br>
+            NFR-05: Card details NOT stored (security policy)
+        </div>
+
+        <!-- CTAs -->
+        <div class="cta-section">
+            <button class="primary-btn">Go to Personal Cabinet</button>
+            <button class="secondary-btn">View Order Details</button>
+        </div>
+    </div>
+</body>
+</html>

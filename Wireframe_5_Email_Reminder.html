@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Reminder Email | Rail Ninja</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #F5F5F5;
+            padding: 20px;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Email Header */
+        .email-header {
+            background: #1A1A1A;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .logo {
+            color: #FFFFFF;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* Email Body */
+        .email-body {
+            padding: 32px 24px;
+        }
+
+        .greeting {
+            font-size: 16px;
+            color: #1A1A1A;
+            margin-bottom: 24px;
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFFBF0 100%);
+            border: 2px solid #F5A623;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .alert-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .alert-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 8px;
+        }
+
+        .alert-subtitle {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .countdown {
+            background: #FFFFFF;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #F5A623;
+            margin-bottom: 16px;
+        }
+
+        /* Trip Details */
+        .trip-card {
+            background: #F8F8F8;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .trip-header {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .trip-route {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .trip-city {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+
+        .trip-arrow {
+            color: #F5A623;
+            font-size: 24px;
+        }
+
+        .trip-date {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Payment Summary */
+        .payment-summary {
+            background: #F8F8F8;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1A1A1A;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .summary-row.highlight {
+            padding-top: 12px;
+            border-top: 1px solid #E5E5E5;
+            margin-top: 8px;
+        }
+
+        .summary-label {
+            color: #666;
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .summary-value.success {
+            color: #34C759;
+        }
+
+        .summary-value.pending {
+            color: #F5A623;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: block;
+            width: 100%;
+            background: #1A1A1A;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .secondary-link {
+            display: block;
+            text-align: center;
+            color: #F5A623;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #E3F2FD;
+            border-left: 4px solid #2196F3;
+            padding: 16px;
+            border-radius: 4px;
+            margin-bottom: 24px;
+        }
+
+        .info-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1565C0;
+            margin-bottom: 8px;
+        }
+
+        .info-text {
+            font-size: 13px;
+            color: #1565C0;
+            line-height: 1.6;
+        }
+
+        .info-text strong {
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .email-footer {
+            background: #F8F8F8;
+            padding: 24px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .footer-links {
+            margin-top: 16px;
+        }
+
+        .footer-link {
+            color: #F5A623;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        /* FRS Annotation */
+        .frs-annotation {
+            background: #E3F2FD;
+            border: 1px solid #2196F3;
+            padding: 12px;
+            margin: 20px 24px;
+            font-size: 11px;
+            color: #1565C0;
+            font-family: monospace;
+            line-height: 1.6;
+            border-radius: 4px;
+        }
+
+        /* Reminder Variants */
+        .variant-selector {
+            background: #FFF3E0;
+            border: 1px solid #F5A623;
+            padding: 12px;
+            margin: 20px 24px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .variant-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #E65100;
+        }
+
+        .variant-item {
+            margin: 4px 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="variant-selector">
+        <div class="variant-title">📧 Email Reminder Variants (Select one to view)</div>
+        <div class="variant-item">• <strong>T-7 Days:</strong> Friendly reminder, low urgency</div>
+        <div class="variant-item">• <strong>T-3 Days:</strong> Moderate urgency, clear deadline</div>
+        <div class="variant-item">• <strong>T-1 Day:</strong> High urgency, action required</div>
+        <div class="variant-item">• <strong>T-0 (Due Date):</strong> Critical, payment due today</div>
+        <div class="variant-item">• <strong>Grace Period:</strong> URGENT, overdue warning (shown below)</div>
+    </div>
+
+    <div class="email-container">
+        <!-- Email Header -->
+        <div class="email-header">
+            <div class="logo">RAIL.NINJA</div>
+        </div>
+
+        <!-- Email Body -->
+        <div class="email-body">
+            <div class="greeting">
+                Hi Oleh,
+            </div>
+
+            <!-- Alert Box - URGENT VARIANT (Grace Period Day 1) -->
+            <div class="alert-box" style="border-color: #FF5722; background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-title" style="color: #D32F2F;">Payment Overdue</div>
+                <div class="alert-subtitle" style="color: #D32F2F;">
+                    Your payment is now past due. Please complete payment to avoid cancellation.
+                </div>
+                <div class="countdown" style="background: #FFFFFF; color: #D32F2F; border: 2px solid #FF5722;">
+                    3 days remaining before auto-cancellation
+                </div>
+            </div>
+
+            <div class="frs-annotation">
+                <strong>Current Variant:</strong> Grace Period Day 1 (FR-29, BR-18, BR-19)<br>
+                This is the URGENT reminder sent when payment is overdue.<br>
+                See variant selector above for other reminder types.
+            </div>
+
+            <!-- Trip Details -->
+            <div class="trip-card">
+                <div class="trip-header">ORDER #RN-12345</div>
+                <div class="trip-route">
+                    <span class="trip-city">Krakow</span>
+                    <span class="trip-arrow">→</span>
+                    <span class="trip-city">Warsaw</span>
+                </div>
+                <div class="trip-date">
+                    Thursday, September 18, 2025 • 12:23 AM - 04:36 AM
+                </div>
+            </div>
+
+            <!-- Payment Summary -->
+            <div class="payment-summary">
+                <div class="summary-title">Payment Status</div>
+                
+                <div class="summary-row">
+                    <span class="summary-label">✓ Payment 1 (Paid)</span>
+                    <span class="summary-value success">$13.00</span>
+                </div>
+
+                <div class="summary-row highlight">
+                    <span class="summary-label">⚠️ Payment 2 (OVERDUE)</span>
+                    <span class="summary-value pending">$32.00</span>
+                </div>
+
+                <div class="summary-row">
+                    <span class="summary-label">Due Date</span>
+                    <span class="summary-value" style="color: #D32F2F;">September 4, 2025</span>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <a href="#" class="cta-button">Pay $32.00 Now</a>
+            <a href="#" class="secondary-link">View Order Details →</a>
+
+            <!-- Important Info -->
+            <div class="info-box" style="background: #FFEBEE; border-left-color: #D32F2F;">
+                <div class="info-title" style="color: #D32F2F;">⚠️ Important: Auto-Cancellation Warning</div>
+                <div class="info-text" style="color: #C62828;">
+                    <strong>Your order will be automatically cancelled in 3 days if payment is not received.</strong>
+                    <br><br>
+                    If cancelled:
+                    <br>• Your booking will be lost
+                    <br>• Service fee ($5.00) is non-refundable
+                    <br>• Ticket portion ($8.00) will be refunded in 5-10 business days
+                </div>
+            </div>
+
+            <div class="frs-annotation">
+                <strong>Grace Period Business Rules:</strong><br>
+                FR-10: Auto-status to "overdue" when due date passes<br>
+                FR-11: 3-day grace period (BR-13)<br>
+                FR-12: Auto-cancel after grace period (BR-14)<br>
+                FR-29: Daily URGENT reminders during grace period (BR-19)<br>
+                FR-13: Service fee forfeited on cancellation (BR-07, A5)<br>
+                FR-15: Ticket portion refunded (BR-08)
+            </div>
+
+            <!-- Need Help? -->
+            <div class="info-box">
+                <div class="info-title">Need Help?</div>
+                <div class="info-text">
+                    If you're experiencing issues or need to discuss payment options, please contact our support team. We're here to help 24/7.
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Footer -->
+        <div class="email-footer">
+            <div>
+                This email was sent to <strong>oleh.syzonov@gmail.com</strong>
+            </div>
+            <div style="margin-top: 12px;">
+                © 2025 Rail.Ninja. All rights reserved.
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Manage Bookings</a>
+                <a href="#" class="footer-link">Support</a>
+                <a href="#" class="footer-link">Unsubscribe</a>
+            </div>
+        </div>
+
+        <div class="frs-annotation">
+            <strong>Reminder Schedule (FR-27, FR-28, FR-29):</strong><br>
+            <strong>Normal Reminders:</strong><br>
+            • T-7 days (Sep 27): Friendly, informative, low urgency<br>
+            • T-3 days (Oct 1): Moderate urgency, clear call-to-action<br>
+            • T-1 day (Oct 3): High urgency, "Payment due tomorrow"<br>
+            • T-0 (Oct 4): Critical, "Payment due TODAY"<br>
+            <br>
+            <strong>Grace Period Reminders (if overdue):</strong><br>
+            • Day 1 (Oct 5): URGENT - 3 days remaining<br>
+            • Day 2 (Oct 6): URGENT - 2 days remaining<br>
+            • Day 3 (Oct 7): URGENT - Last day before cancellation<br>
+            <br>
+            <strong>Stop Conditions (BR-17, BR-18):</strong><br>
+            • Payment 2 received → Stop all reminders<br>
+            • Order cancelled → Stop all reminders<br>
+            <br>
+            <strong>Design Notes:</strong><br>
+            • Color coding: Green (on-time) → Yellow (approaching) → Orange (due) → Red (overdue)<br>
+            • Urgency increases with each reminder<br>
+            • Clear CTAs and countdown timers<br>
+            • Mobile-responsive design required
+        </div>
+    </div>
+</body>
+</html>
