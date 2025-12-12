@@ -1,4 +1,6 @@
-# Part 1 (In-Person Interview)
+# TASK DESCRIPTION
+
+## Part 1 (In-Person Interview)
 
 During the interview, you should gather requirements from the interviewer for a feature that is planned for release (in reality, this functionality is already in production).
 - When a user searches for tickets for dates that are not yet available for sale, we activate the Advanced Reservation service.
@@ -7,7 +9,7 @@ Advanced Reservation is the default service when tickets are not yet available f
 issued once they become available.
 Pricelock is an add-on to Advanced Reservation that allows the payment to be split and extended over time, up until the moment the tickets are issued. In other words, Pricelock is provided not based on the route, train, fare, etc., but solely based on the search depth.
 
-# Part 2 (Offline)
+## Part 2 (Offline)
 
 After the interview, you must prepare a Software Requirements Document (SRD), which should include
 the following information:
