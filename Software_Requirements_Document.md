@@ -3875,7 +3875,7 @@ Complete test specifications are maintained in separate document: **Test_Cases_P
 - **P2 (Medium):** Minor issues, workarounds available
 - **P3 (Low):** Cosmetic, nice-to-have
 
-**Reference:** See **Test_Cases_Pricelock.md** for detailed test procedures, expected results, and test code examples.
+**Reference:** See **[Test_Cases_Pricelock.md](Test_Cases_Pricelock.md)** for detailed test procedures, expected results, and test code examples.
 
 ---
 
