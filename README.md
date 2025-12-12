@@ -1,5 +1,5 @@
 # Purpose
-Artifacts in this repository showcase Business Analysis work on defining characteristics of new feature that is extension of payment plans on rail tickets trading platform. The target and main document is [SRD ](Software_Requirements_Document.md)
+Artifacts in this repository showcase Business Analysis work on defining characteristics of new feature that is extension of payment plans on rail tickets trading platform. The target and main document is [Software Requirements Documet](Software_Requirements_Document.md) (SRD).
 
 # Scope
 - [Task Description](Task_Description.md)
