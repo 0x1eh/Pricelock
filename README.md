@@ -25,4 +25,4 @@ Artifacts in this repository showcase Business Analysis work on defining charact
 - [Test Cases](Test_Cases_Pricelock.md) - extends use case referenced in the SRD with execution details
 
 ***Note**: _All files, except html mock-ups, has .md format that is convinient to view directly in this github repo via web-browser.<br>
-           	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; html-files is better (if you don't have github html viwer extention) to download and open with your web-browser._
+           	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; html-files is better (if you don't have github html viwer extention) to download and open with your web-browser._
