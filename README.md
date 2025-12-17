@@ -11,8 +11,8 @@ Artifacts in this repository showcase Business Analysis work on defining charact
 	1. **Inability to investigate Private Cabinet** due to that account creation requires ordering ticket(s)
 	2. Limited choice of AI tools
 	3. Limit in time and amount of requests and volume of data processed by AI 
-2. The work had deadline in 1 week
-3. [Assumptions](03_assumptions_and_decisions.md) made to mitigate limitations and knowledge gaps
+2. The work had 1 week deadline
+3. [Assumptions](03_assumptions_and_decisions.md) are made to mitigate limitations and knowledge gaps
 
 # Result
 - [Software Requirements Document](Software_Requirements_Document.md) - the main document
