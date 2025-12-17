@@ -7,7 +7,7 @@ Artifacts in this repository showcase Business Analysis work on defining charact
 - [Requirements Elicitation Results](01_interview_elicitation_results.md)
 - [Existing Solution Analysis](02_rail_ninja_web_analysis.md) (web-platform, mobile app)
 # Limitations
-1. This BA work is zero-budgeted, that lead to:
+1. This BA work was zero-budgeted, that lead to:
 	1. **Inability to investigate Private Cabinet** due to that account creation requires ordering ticket(s)
 	2. Limited choice of AI tools
 	3. Limited in time and amount of requests and volume of data processed by AI 
